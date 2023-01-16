@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import "./App.scss";
 
@@ -60,25 +60,28 @@ import "./App.scss";
 // }
 
 const Slider = (props) => {
-	// const [slide, setSlide] = useState(0);
-	// const [autoplay, setAutoplay] = useState(false);
-	const [state, setState] = useState({ slide: 0, autoplay: false });
-
-	function changeSlide(i) {
-		setState((state) => ({ ...state, slide: state.slide + 1 }));
-	}
-
-	function toggleAutoplay() {
-		setState((state) => ({ ...state, autoplay: !state.autoplay }));
-	}
+	const [slide, setSlide] = useState(0);
+	const [autoplay, setAutoplay] = useState(false);
+	// const [state, setState] = useState({ slide: 0, autoplay: false });
 
 	// function changeSlide(i) {
-	// 	setSlide((slide) => slide + i);
+	// 	setState((state) => ({ ...state, slide: state.slide + 1 }));
 	// }
 
 	// function toggleAutoplay() {
-	// 	setAutoplay((autoplay) => !autoplay);
+	// 	setState((state) => ({ ...state, autoplay: !state.autoplay }));
 	// }
+	useEffect(() => {
+		document.title = `Slide: ${slide}`;
+	});
+
+	function changeSlide(i) {
+		setSlide((slide) => slide + i);
+	}
+
+	function toggleAutoplay() {
+		setAutoplay((autoplay) => !autoplay);
+	}
 
 	return (
 		<Container>
@@ -89,7 +92,7 @@ const Slider = (props) => {
 					alt="slide"
 				/>
 				<div className="text-center mt-5">
-					Active slide {state.slide} <br /> {state.autoplay ? "auto" : null}
+					Active slide {slide} <br /> {autoplay ? "auto" : null}
 				</div>
 				<div className="buttons mt-3">
 					<button
