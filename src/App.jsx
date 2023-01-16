@@ -30,6 +30,13 @@ const Slider = (props) => {
 		return countTotal(slide);
 	}, [slide]);
 
+	const style = useMemo(
+		() => ({
+			color: slide > 4 ? "red" : "black",
+		}),
+		[slide]
+	);
+
 	return (
 		<Container>
 			<div className="slider w-50 m-auto">
@@ -43,7 +50,9 @@ const Slider = (props) => {
 				<div className="text-center mt-5">
 					Active slide {slide} <br /> {autoplay ? "auto" : null}
 				</div>
-				<div className="text-center mt-5">Total slides: {total}</div>
+				<div style={style} className="text-center mt-5">
+					Total slides: {total}
+				</div>
 				<div className="buttons mt-3">
 					<button
 						className="btn btn-primary me-2"
